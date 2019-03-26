@@ -23,7 +23,7 @@ RUN bvenv/bin/pip install -r requirements.txt
 # COPY properties properties
 COPY lib lib
 COPY load_murcs load_murcs
-COPY rebuild_sqlite.py ./
+COPY backup.sh rebuild_sqlite.py set_dbname.py ./
 # COPY fromflask.py config.py boot.sh .env .flaskenv ./
 # RUN chmod +x boot.sh
 
