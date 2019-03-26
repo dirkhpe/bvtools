@@ -25,7 +25,7 @@ COPY lib lib
 COPY load_murcs load_murcs
 COPY backup.sh rebuild_sqlite.py set_dbname.py ./
 # COPY fromflask.py config.py boot.sh .env .flaskenv ./
-# RUN chmod +x boot.sh
+RUN chmod +x backup.sh
 
 RUN chown -R dirk:dirk ./
 RUN chown -R dirk:dirk /logs
