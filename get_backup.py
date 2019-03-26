@@ -10,7 +10,7 @@ from lib import my_env
 from lib.my_env import run_script
 
 cfg = my_env.init_env("bellavista", __file__)
-dbname = "{host}_{date}".format(host=platform.node(), date=datetime.datetime.now().strftime("%Y%m%d"))
+dbname = "{host}_{date}.db".format(host=platform.node(), date=datetime.datetime.now().strftime("%Y%m%d"))
 os.environ["LOCALDB"] = dbname
 (fp, filename) = os.path.split(__file__)
 for script in ["rebuild_sqlite.py", "murcs_Get.py"]:
