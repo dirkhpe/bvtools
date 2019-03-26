@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/ash
 source bvenv/bin/activate
 python set_dbname.py
 python rebuild_sqlite.py

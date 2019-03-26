@@ -23,13 +23,13 @@ RUN bvenv/bin/pip install -r requirements.txt
 # COPY properties properties
 COPY lib lib
 COPY load_murcs load_murcs
-COPY backup.sh rebuild_sqlite.py set_dbname.py ./
+COPY rebuild_sqlite.py get_backup.py ./
 # COPY fromflask.py config.py boot.sh .env .flaskenv ./
-RUN chmod +x backup.sh
+RUN chmod +x get_backup.py
 
 RUN chown -R dirk:dirk ./
 RUN chown -R dirk:dirk /logs
 USER dirk
 
 # EXPOSE 5000
-CMD ["./backup.sh"]
+CMD ["get_backup.py"]
