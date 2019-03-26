@@ -42,8 +42,6 @@ for cnt in range(len(res)):
     res[cnt]["status"] = None
 lcl.insert_rows("server", res)
 
-sys.exit("Gedaan...")
-
 logging.info("Handling Server detail information")
 query = "SELECT serverId FROM server"
 records = lcl.get_query(query)
