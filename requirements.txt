@@ -1,0 +1,8 @@
+et-xmlfile
+openpyxl
+py2neo
+PyMySQL
+requests
+SQLAlchemy
+urllib3
+python-dotenv
