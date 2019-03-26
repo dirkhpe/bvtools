@@ -32,4 +32,4 @@ RUN chown -R dirk:dirk /logs
 USER dirk
 
 # EXPOSE 5000
-# ENTRYPOINT ["./boot.sh"]
+CMD ["./backup.sh"]
