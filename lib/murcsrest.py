@@ -719,7 +719,7 @@ class MurcsRest:
         :return:
         """
         solId = sol_rec["solId"]
-        solInstId = my_env.get_solinstid(solId, env)
+        solInstId = my_env.get_solInstId(solId, env)
         solution = dict(solutionId=solId)
         env_abbr = my_env.env2abbr(env)
         payload = dict(

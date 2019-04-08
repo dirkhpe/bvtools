@@ -6,7 +6,6 @@ from lib import localstore
 from lib import my_env
 from lib.murcs import *
 from lib import murcsrest
-import sys
 
 solToSol_done = []
 
@@ -23,14 +22,6 @@ logging.info("Handling Person information")
 res = []
 r.get_data("persons", reslist=res)
 lcl.insert_rows("person", res)
-
-logging.info("Handling Software")
-res = []
-r.get_data("software", reslist=res)
-for cnt in range(len(res)):
-    # Todo: process State variable
-    res[cnt]["status"] = None
-lcl.insert_rows("software", res)
 
 logging.info("Handling Servers")
 res = []
@@ -69,7 +60,9 @@ for record in records:
     if len(softinstances) > 0:
         for cnt in range(len(softinstances)):
             softinstances[cnt]["serverId"] = handle_server(softinstances[cnt].pop("server"))
-            softinstances[cnt]["softwareId"] = handle_software(softinstances[cnt].pop("software"))
+            softinstances[cnt]["softwareId"], swdict = handle_software(softinstances[cnt].pop("software"))
+            if isinstance(swdict, dict):
+                lcl.insert_row("software", swdict)
         lcl.insert_rows("softinst", softinstances)
 
 logging.info("Collecting Solutions")
