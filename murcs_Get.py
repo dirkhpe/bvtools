@@ -14,7 +14,12 @@ cfg = my_env.init_env("bellavista", __file__)
 r = murcsrest.MurcsRest(cfg)
 lcl = localstore.sqliteUtils(cfg)
 
+logging.info("Get Version Information")
+res = r.get_version()
+lcl.insert_row("version", res)
+
 res = []
+logging.info("Get Site information")
 r.get_data("sites", reslist=res)
 lcl.insert_rows("site", res)
 

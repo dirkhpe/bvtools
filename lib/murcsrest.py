@@ -13,11 +13,9 @@ class MurcsRest:
     This class will set up the attributes for the Murcs Rest call.
     """
 
-    def __init__(self, cfg):
+    def __init__(self):
         """
         The init procedure will set-up the Murcs Rest parameters.
-
-        :param cfg: Link to the configuration object.
         """
         # Remove http_proxy environment settings if they exist.
         # If they exist, Python "requests" module will route over http_proxy instead of using OpenVPN.
@@ -31,9 +29,8 @@ class MurcsRest:
         host = os.getenv("MURCS_HOST")
         port = os.getenv("MURCS_PORT")
         clientId = os.getenv("MURCS_CLIENTID")
-        self.url_base = "http://{host}:{port}/murcs/rest/{clientId}/".format(host=host,
-                                                                             port=port,
-                                                                             clientId=clientId)
+        self.url_loc = "http://{host}:{port}/murcs/rest/".format(host=host, port=port)
+        self.url_base = "{url_loc}{clientId}/".format(url_loc=self.url_loc, clientId=clientId)
 
     def add_server(self, serverId, payload):
         """
@@ -331,6 +328,29 @@ class MurcsRest:
         if r.status_code == 200:
             res = r.json()
             return res["items"]
+        else:
+            logging.fatal("Investigate: {s}".format(s=r.status_code))
+            logging.fatal(r.content)
+            r.raise_for_status()
+            return
+
+    def get_version(self):
+        """
+        This method launches the Rest call to get version information
+
+        :return:
+        """
+        url = self.url_loc + 'version'
+        headers = {
+            'Accept': 'application/json'
+        }
+        r = requests.get(url, headers=headers, auth=(self.user, self.passwd))
+        if r.status_code == 200:
+            res = r.json()
+            msg = "Murcs Version: {mv} - Database Version: {dbv}".format(mv=res["murcsVersion"],
+                                                                         dbv=res["databaseVersion"])
+            logging.info(msg)
+            return res
         else:
             logging.fatal("Investigate: {s}".format(s=r.status_code))
             logging.fatal(r.content)
