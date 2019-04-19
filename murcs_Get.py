@@ -11,8 +11,8 @@ solToSol_done = []
 
 
 cfg = my_env.init_env("bellavista", __file__)
-r = murcsrest.MurcsRest(cfg)
-lcl = localstore.sqliteUtils(cfg)
+r = murcsrest.MurcsRest()
+lcl = localstore.sqliteUtils()
 
 logging.info("Get Version Information")
 res = r.get_version()
