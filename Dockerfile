@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN adduser -D dvermeylen
+RUN adduser -r -u 50001 dirk
 
 WORKDIR /home/bv
 RUN mkdir /logs
@@ -26,9 +26,9 @@ COPY .env rebuild_sqlite.py get_backup.py murcs_Get.py ./
 # COPY fromflask.py config.py boot.sh .env .flaskenv ./
 RUN chmod +x get_backup.py
 
-RUN chown -R dvermeylen:dvermeylen ./
-RUN chown -R dvermeylen:dvermeylen /logs
-USER dvermeylen
+RUN chown -R 50001:50005 ./
+RUN chown -R 50001:50005 /logs
+USER dirk
 
 # EXPOSE 5000
 CMD ["/home/bv/get_backup.py"]
