@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
 
-RUN adduser -r -u 50001 dirk
+RUN adduser -D -u 50001 dirk
 
 WORKDIR /home/bv
 RUN mkdir /logs
